@@ -16,5 +16,6 @@ const deleteAll = (req,res,next) => {};
 const updateGPU = (req,res,next) => {};
 const getGPU = (req,res,next) => {};
 const deleteGPU = (req,res,next) => {};
+const postReview = (req,res,next) => {};
 
-module.exports = { newGPU, allGPU, deleteAll, updateGPU, getGPU, deleteGPU };
+module.exports = { newGPU, allGPU, deleteAll, updateGPU, getGPU, deleteGPU, postReview };
