@@ -1,8 +1,14 @@
 const express = require('express');
+const res = require('express/lib/response');
 const router = express.Router();
 const gpuController = require('../controllers/gpu');
 
-router.get('/', {
+router.get('/', (req,res,next) => res.json({
+    Headers: req.headers,
+    OG_URL: req.originalUrl,
+    Method: req.method,
+    Body: req.body,
+    Time: req.requestTime,
     FrontEnd: {Status: 'Not Available'},
     BackeEnd: {Status: 'Uploaded on Heroku'},
     Routes: {
@@ -10,7 +16,7 @@ router.get('/', {
         gpu: {Methods: 'post,get,delete'},
         gpu_pn: {Methods: 'post,put,get,delete'}
     }
-});
+}));
 
 router.post('/gpu', gpuController.newGPU);
 router.get('/gpu', gpuController.allGPU);
