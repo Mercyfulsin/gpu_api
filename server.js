@@ -35,6 +35,7 @@ const requestTime = function (req, res, next) {
   let hour = computerTime.getHours();
   let min = computerTime.getMinutes();
   let sec = computerTime.getSeconds();
+  min = min <= 9 ? "0" + min : min;
   sec = sec <= 9 ? "0" + sec : sec;
   let time =
     month + " " + date + " " + year + " " + hour + ":" + min + ":" + sec;
