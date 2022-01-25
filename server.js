@@ -1,6 +1,17 @@
+require('dotenv').config();
 const express = require("express");
 const routes = require("./routes/gpu");
+const mongoose = require('mongoose');
 const app = express();
+
+// establish connection:
+mongoose.connect(
+    process.env.MONGO_URL,
+    (e) => {
+        if (e) return console.log("Error: ", e);
+        console.log("MongoDB Connection -- Ready state is:", mongoose.connection.readyState);
+    }
+);
 
 app.use(express.json());
 
