@@ -1,3 +1,4 @@
 .env.*
 .env
 node_modules
+temp_gpu_data.txt
