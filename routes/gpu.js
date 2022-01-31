@@ -1,5 +1,7 @@
 const express = require('express');
 const router = express.Router();
+const multer = require('multer');
+const upload = multer();
 const gpuController = require('../controllers/gpu');
 
 router.get('/', (req,res,next) => res.json({
@@ -17,11 +19,11 @@ router.get('/', (req,res,next) => res.json({
     }
 }));
 
-router.post('/gpu', gpuController.newGPU);
+router.post('/gpu', upload.none(), gpuController.newGPU);
 router.get('/gpu', gpuController.allGPU);
 router.delete('/gpu', gpuController.deleteAll);
 router.post('/gpu/:pn', gpuController.postReview);
-router.put('/gpu/:pn', gpuController.updateGPU);
+router.put('/gpu/:pn', upload.none(), gpuController.updateGPU);
 router.get('/gpu/:pn', gpuController.getGPU);
 router.delete('/gpu/:pn', gpuController.deleteGPU);
 

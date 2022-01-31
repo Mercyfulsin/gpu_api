@@ -1,0 +1,3 @@
+* Controllers *
+
+A controller takes a request from the API route and 'controls' it. It uses the mongoose model as a reference to what data is required for the object. The controller is in charge of dissecting the request and grabbing information or storing information from and to the database. It is also in charge of returning errors such as an item not exisiting, the request having insufficient data to create an object, etc.
