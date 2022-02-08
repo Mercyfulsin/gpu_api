@@ -3,7 +3,6 @@ const GPU = require('../models/gpu');
 const newGPU = (req,res,next) => {
     GPU.findOne({ pn: req.body.pn }, (e, data) => {
         const info = req.body;
-        console.log(info.review[0]);
         if(!data){
 
             const newGPU = new GPU({
@@ -15,7 +14,6 @@ const newGPU = (req,res,next) => {
                 info3: info.info3,
                 info4: info.info4,
                 info5: info.info5,
-                review: [{ text: info.review[0], date: new Date() }]
             });
             console.log(newGPU);
 
@@ -29,6 +27,7 @@ const newGPU = (req,res,next) => {
     });
 };
 const allGPU = (req,res,next) => {
+    console.log("Getting all gpu");
     GPU.find({}, (e,data)=>{
         e ? res.json({Error:e}) : res.json(data);
     });
@@ -39,19 +38,29 @@ const deleteAll = (req,res,next) => {
     });
 };
 const updateGPU = (req,res,next) => {
-    console.log(req.body, req.params.pn);
-    GPU.findOneAndUpdate({pn: req.params.pn}, {review: req.body.review}, (e, data) => {
+    const updateValues = JSON.parse(JSON.stringify(req.body));
+    console.log(updateValues.pn);
+    console.log({...updateValues});
+    GPU.findOneAndUpdate({pn: req.params.pn}, {$set:{pn: updateValues.pn}}, (e, data) => {
+        console.log("What is the data?");
+        console.log(data);
         e || !data ? res.json({Error: e}) : res.json(data);
     });
+    console.log(`Updated GPU ${req.params.pn} with ${JSON.stringify(updateValues)}`);
 };
 const getGPU = (req,res,next) => {
-    let pn = req.body.pn;
+    let pn = req.params.pn;
     GPU.findOne({pn: pn}, (e,data)=>{
         e || !data ? res.json({Error: e}) : res.json(data);
     });
+    console.log(`Grabbed GPU ${pn}`);
 };
 const deleteGPU = (req,res,next) => {
-
+    const pn = req.params.pn;
+    GPU.deleteOne({pn: pn}, (e,data)=>{
+        e || !data ? res.json({Error: e}) : res.json(data);
+    });
+    console.log(`Deleted GPU ${pn}`);
 };
 const postReview = (req,res,next) => {
     const pn = req.params.pn;

@@ -13,7 +13,7 @@ mongoose.connect(
     }
 );
 app.use(express.json());
-
+app.use(express.urlencoded({extended: true}));
 // TIL: creating a function and having the app use it will
 // cause function to be called everytime a request comes in
 // before hitting the destination app.use of the call that is

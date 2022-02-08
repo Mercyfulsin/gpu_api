@@ -24,7 +24,7 @@ router.get('/gpu', gpuController.allGPU);
 router.delete('/gpu', gpuController.deleteAll);
 router.post('/gpu/:pn', gpuController.postReview);
 router.put('/gpu/:pn', upload.none(), gpuController.updateGPU);
-router.get('/gpu/:pn', gpuController.getGPU);
+router.get('/gpu/:pn', upload.none(), gpuController.getGPU);
 router.delete('/gpu/:pn', gpuController.deleteGPU);
 
 module.exports = router;
